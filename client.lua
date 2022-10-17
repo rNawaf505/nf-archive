@@ -1,7 +1,7 @@
 local QBCore=exports[Config.coreExport]:GetCoreObject();
 
 local function dothisShit();
-    for k, v in pairs(Config.BoxZones) do
+    for k, v in pairs(Config.Target) do
         [Config.targetExport]AddBoxZone('nawaf-archive',v.coords,v.a,v.b,{
             name="nawaf-archive",
             heading=v.heading,
@@ -50,7 +50,7 @@ local function archiveList(data, job);
         }
 };
 exports['qb-menu']:openMenu(array);end;
-local function chooseArchive()
+local function chooseArchive(job)
     ;local dialog=exports[Config.input]:ShowInput({
         header="Archive Number",
         submitText="Submit",
