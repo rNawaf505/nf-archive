@@ -24,9 +24,6 @@ local function dothisShit();
     end;
 end;
 
-CreateThread(function()
-    dothisShit();
-end)
 local function archiveList(data, job);
     local array={
         {
