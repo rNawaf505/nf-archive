@@ -3,7 +3,7 @@ QBCore Police Archive
 
 [Discord](https://discord.gg/AM1)
 
-[Preview](https://vimeo.com/761015832)
+[Preview](https://streamable.com/0c6c26)
 
 This resource was created by myself
 # Dependencies
