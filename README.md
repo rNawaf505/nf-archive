@@ -6,6 +6,8 @@ QBCore Police Archive
 [Preview](https://streamable.com/0c6c26)
 
 This resource was created by myself
+# What is the new on update
+now you can add more box zones & in config(job) its the archive name
 # Dependencies
 - [qb-core](https://github.com/qbcore-framework/qb-core)
 - [qb-target](https://github.com/qbcore-framework/qb-target)
