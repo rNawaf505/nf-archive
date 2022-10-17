@@ -1,9 +1,8 @@
 local QBCore=exports[Config.coreExport]:GetCoreObject();
-
 local function dothisShit();
-    for k, v in pairs(Config.Target) do
-        [Config.targetExport]:AddBoxZone('nawaf-archive',v.coords,v.a,v.b,{
-            name="nawaf-archive",
+    for k, v in pairs(Config.BoxZones) do
+        exports[Config.targetExport]:AddBoxZone('nawaf-archive-'..v.job..'-'..k,v.coords,v.a,v.b,{
+            name="nawaf-archive-"..v.job..'-'..k,
             heading=v.heading,
             debugPoly=v.debugPoly,
             minZ=v.minZ,
@@ -19,12 +18,15 @@ local function dothisShit();
                     }
                 }
             },
-            job={v.job},
-            distance=v.distance
+            job = {v.job},
+            distance = v.distance
         })
     end;
 end;
 
+CreateThread(function()
+    dothisShit();
+end)
 local function archiveList(data, job);
     local array={
         {
@@ -37,7 +39,7 @@ local function archiveList(data, job);
             params={
                 event='nawaf:client:openArchiveByNumber',
                 args={
-                    num=tostring(data)
+                    num=tostring(data),
                     jobArchive = job
                 }
             }
@@ -45,13 +47,19 @@ local function archiveList(data, job);
         {
             header='Change Archive',
             params={
-                event='nawaf:client:openArchive'
+                event='nawaf:client:openArchive',
+                args = {
+                    menu = true,
+                    job = job
+                }
             }
         }
 };
-exports['qb-menu']:openMenu(array);end;
-local function chooseArchive(job)
-    ;local dialog=exports[Config.input]:ShowInput({
+exports['qb-menu']:openMenu(array);
+end;
+
+local function chooseArchive(job);
+    local dialog = exports[Config.inputExport]:ShowInput({
         header="Archive Number",
         submitText="Submit",
         inputs={
@@ -73,14 +81,18 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function();
     dothisShit();
 end);
 
-AddEventHandler('nawaf:client:openArchive', function(data);
-    chooseArchive(data.params.jobArchive);
+AddEventHandler('nawaf:client:openArchive', function(data, menu);
+    if not data.menu then
+        chooseArchive(data.params.jobArchive);
+    else
+        chooseArchive(data.job);
+    end
 end);
 
-AddEventHandler('nawaf:client:openArchiveByNumber', function(data, job);
-    TriggerServerEvent("inventory:server:OpenInventory", "stash", job.."_archive_"..tostring(data.num),{
+AddEventHandler('nawaf:client:openArchiveByNumber', function(data);
+    TriggerServerEvent("inventory:server:OpenInventory", "stash", data.jobArchive.."_archive_"..tostring(data.num),{
         maxweight=4000000,
         slots=300
     });
-    TriggerEvent("inventory:client:SetCurrentStash", job.."_archive_"..tostring(data.num))
+    TriggerEvent("inventory:client:SetCurrentStash", data.jobArchive.."_archive_"..tostring(data.num))
 end);
