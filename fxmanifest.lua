@@ -8,7 +8,7 @@ lua54 'yes'
 
 author 'Nawaf505#0772'
 description 'Police Archive'
-version '1.0.0'
+version '1.1.0'
 
 shared_script 'config.lua'
 client_script 'client.lua'
