@@ -1,7 +1,7 @@
 local QBCore=exports[Config.coreExport]:GetCoreObject();
 
 local function dothisShit();
-    for k, v in pairs(Config.Target) do
+    for k, v in pairs(Config.BoxZones) do
         [Config.targetExport]AddBoxZone('nawaf-archive',v.coords,v.a,v.b,{
             name="nawaf-archive",
             heading=v.heading,
