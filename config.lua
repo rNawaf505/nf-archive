@@ -4,7 +4,7 @@ Config.coreExport = 'qb-core';
 Config.inputExport = 'qb-input';
 Config.targetExport = 'qb-target';
 
-Config.Target = {
+Config.BoxZones = {
     {
         coords = vec3(458.81, -990.09, 24.91),
         a = 2.45,
